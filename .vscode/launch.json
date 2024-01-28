@@ -1,0 +1,25 @@
+{
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "Dev",
+      "request": "launch",
+      "command": "yarn docs:dev",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Preview",
+      "request": "launch",
+      "command": "yarn docs:preview",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Build",
+      "request": "launch",
+      "command": "yarn docs:build",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

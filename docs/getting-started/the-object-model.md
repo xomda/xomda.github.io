@@ -1,0 +1,142 @@
+---
+outline: deep
+---
+
+<script setup>
+    import CsvTable from "../../src/components/CsvTable.vue"
+</script>
+
+# The Object Model
+
+The Object Model is specified in CSV-format, where each row represents a single object. An Object Model consists of 2
+parts:
+
+- The schema of the object model
+- The model definitions
+
+## The model schema
+
+The first rows of the CSV specify the schema. The first blank line distinguished the schema from the actual model.
+
+Each line in the CSV schema specifies a type of Object. The **name** of this Object is defined in the first column. Its
+**properties** are defined in the subsequent columns, in the same column index as they will be encountered in the model
+definition following the schema.
+
+<CsvTable data="
+Package;name;packageName;;;;;;;;;
+Enum;name;identifier;;;;;;;;;description
+Value;name;;;;;;;;;;description
+Entity;name;identifier;parent;type;;dependency;transient;;;;description
+Attribute;name;identifier;type;size;scale;enumRef;entityRef;dependency;multiValued;required;description
+"/>
+
+### How The schema is parsed
+
+First, the CSV parser will try to match a corresponding Java interface, which matches the name of the current object.
+The name of the is defined in the first column; for the shipped model, this would then be _Package_, _Enum_, _Entity_
+and _Attribute_.  
+The packagename of the Object is specified in the settings, and defaults standard to `org.xomda.model`.
+
+Next, when a corresponding Java interface is found, the parser will try to figure out the type of each property that is
+defined in the schema. This is done by looking for getters with a corresponding name and look at their return type.
+
+### Linking models together
+
+An Attribute should know it's attached to an Entity, or a Value to an Enum. This is done by providing a list on the
+parent, and a back-reference on the child.  
+For example: The Entity Java interface has a getter called `Collection<Attribute> getAttributeList()`,
+while Attribute has a getter called `Entity getEntity()`.  
+This ties the both together, such that the parser knows that it should add Attributes to the previously defined Entity.
+
+So when defining your own model, keep this principle in mind if you want to create parent / child relationships.
+
+## The model definition
+
+The subsequent lines following the object model schema, are the object model definition itself.
+Each line will start with one of the Objects defined in the Schema.
+
+For example, defining a Package is done like so:
+
+<CsvTable data="
+Package;XOMDA;org.xomda;;;;;;;;;
+"/>
+
+... or an Enum like so:
+
+<CsvTable data="
+Enum;Weekday;wkd;;;;;;;;;
+Value;Monday;1;;;;;;;;;
+Value;Tuesday;2;;;;;;;;;
+Value;Wednesday;3;;;;;;;;;
+Value;Thursday;4;;;;;;;;;
+Value;Friday;5;;;;;;;;;
+Value;Saturday;6;;;;;;;;;
+Value;Sunday;7;;;;;;;;;
+"/>
+
+... or an Entity like so:
+
+<CsvTable data="
+Entity;Customer;cst;;Dynamic;;Aggregate;;;;;
+Attribute;First Name;fname;String;255;;;;;;;
+Attribute;Last Name;lname;String;255;;;;;;;
+Attribute;E-mail;eml;String;255;;;;;;;
+"/>
+
+## Extending the Object Model
+
+If you want to create a custom Object Model, you can do so by creating new Java interfaces for each Object found in the
+CSV schema. The parser will create proxy objects for these interfaces, so you don't need to provide implementation
+classes.
+
+You can either extend the existing schema objects (provided by XOMDA), or create complete new objects which have nothing
+to do with the default XOMDA object model.
+
+### Adding new Schema objects
+
+The following line in a CSV schema will introduce an object called `Fish`, which has a name and an age:
+
+<CsvTable data="
+Fish;name;age;
+"/>
+
+In order to make the parser understand `Fish`, it needs to find the Fish Java interface at the given classpath in the
+configuration.  
+The Java interface may then look something like this:
+
+````java
+package your.package.name;
+
+public interface Fish {
+
+    String getName();
+    setName(String name);
+
+    int getAge();
+    setAge(int age);
+
+}
+````
+
+The compiler can then use this interface to correctly determine the Java types being used (because CSV only returns
+String values).
+
+### Extending existing Schema objects
+
+You may want to just extend the default functionality of the default Object Model. For example, you may just want to add
+an extra attribute, or some new Reverse Entity relationship.
+
+````java
+package your.package.name;
+
+import org.xomda.model.Entity
+
+public interface MyEntity extends Entity {
+
+    Long getSomethingExtra();
+    setSomethingExtra(Long somethingExtra);
+
+}
+````
+
+By doing so, you're now able to use `MyEntity` instead of `Entity` provided by XOMDA.
