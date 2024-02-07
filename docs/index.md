@@ -8,12 +8,12 @@ hero:
   tagline: Don't write it. Generate it!
   image: "./logo.png"
   actions:
-    - theme: brand
-      text: Get started
-      link: /getting-started/the-object-model
     - theme: alt
-      text: Documentation
+      text: Get Started
       link: /intro/what-is-xomda
+    - theme: brand
+      text: Test Project
+      link: https://github.com/xomda/test-project
 
 features:
   - title: CSV Model
