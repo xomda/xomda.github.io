@@ -14,9 +14,6 @@ hero:
     - theme: alt
       text: Documentation
       link: /intro/what-is-xomda
-#    - theme: sponsor
-#      text: Become a sponsor
-#      link: https://www.patreon.com/JorisAerts
 
 features:
   - title: CSV Model
@@ -29,3 +26,11 @@ features:
     details: Easily integrate the whole process into your gradle build.
 ---
 
+<script setup>
+import { VPButton } from 'vitepress/theme'
+
+</script>
+
+<div style="margin: 1.25em; margin-top:2.5em; text-align: center;">
+<VPButton text="♥️ Buy us a coffee" href="https://ko-fi.com/xomda" theme="sponsor"/>
+</div>
