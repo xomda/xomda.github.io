@@ -8,10 +8,10 @@ hero:
   tagline: Don't write it. Generate it!
   image: "./logo.png"
   actions:
-    - theme: alt
+    - theme: brand
       text: Get Started
       link: /intro/what-is-xomda
-    - theme: brand
+    - theme: alt
       text: Test Project
       link: https://github.com/xomda/test-project
 
