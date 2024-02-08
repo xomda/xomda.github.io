@@ -1,18 +1,20 @@
 ---
 outline: deep
 ---
+
 # Code Templates
 
 The code templates can be used to generate code out of your Object Model.
-Examples can be java interfaces and classes, but also configuration files (like Liquibase changesets) or even documentation.
+Examples can be java interfaces and classes, but also configuration files (like Liquibase changesets) or even
+documentation.
 
 Below is a simple implementation of a template:
 
 ***ExampleTemplate.java***
 
 ```java
-import org.xomda.core.template.Template;
-import org.xomda.core.template.TemplateContext;
+import org.xomda.template.Template;
+import org.xomda.template.TemplateContext;
 
 public class TestTemplate implements Template<Object> {
 
@@ -23,7 +25,7 @@ public class TestTemplate implements Template<Object> {
 }
 ```
 
-The templates should implement the `org.xomda.core.template.Template` interface, provided by XOMDA.
+The templates should implement the `org.xomda.template.Template` interface, provided by XOMDA.
 
 ## Java Code Template
 
