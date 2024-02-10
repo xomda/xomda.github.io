@@ -4,7 +4,7 @@ outline: deep
 
 # Code Templates
 
-The code templates can be used to generate code out of your Object Model.
+The templates can be used to generate assets, such as code out of your Object Model.
 Examples can be java interfaces and classes, but also configuration files (like Liquibase changesets) or even
 documentation.
 
@@ -40,7 +40,15 @@ indenting, tabbing, writing Javadoc and more.
 Inside a `JavaClassWriter`-instance, there's an instance of a `JavaImportService`. This is a special class
 which will assist you with managing class-level imports.
 
+When writing the output, the `JavaClassWriter` will take care of declaring the package and printing the imports.
+During the generation you can add imports to the `JavaImportService` and it will return the either the fully qualified
+class name or the simple one, depending on the circumstances.
+
+You can use `addImport`, `addStaticImport` and `addGenericImport` to add imports to the service.
+
 ### Example template
+
+The following Template will generate java beans, interfaces and enums.
 
 **_GenerateEntityTemplate.java_**
 
