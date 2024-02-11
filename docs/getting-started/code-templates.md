@@ -22,6 +22,7 @@ public class TestTemplate implements Template<Object> {
     public void generate(Object o, TemplateContext ctx) {
         System.out.println("It works!");
     }
+
 }
 ```
 
@@ -55,24 +56,24 @@ The following Template will generate java beans, interfaces and enums.
 ```java
 public class GenerateEntityTemplate extends PackageTemplate {
 
-	@Override
-	public void generate(final Entity entity, final TemplateContext context) throws IOException {
-		String javaInterface = TemplateUtils.getJavaInterfaceName(entity);
-		String javaClass = TemplateUtils.getJavaBeanName(entity);
-		PojoWriter
-				.createInterface(context.cwd(), javaInterface)
-				.write(entity);
-		PojoWriter
-				.create(context.cwd(), javaClass)
-				.withImplements(javaInterface)
-				.write(entity);
-	}
+    @Override
+    public void generate(final Entity entity, final TemplateContext context) throws IOException {
+        String javaInterface = TemplateUtils.getJavaInterfaceName(entity);
+        String javaClass = TemplateUtils.getJavaBeanName(entity);
+        PojoWriter
+                .createInterface(context.cwd(), javaInterface)
+                .write(entity);
+        PojoWriter
+                .create(context.cwd(), javaClass)
+                .withImplements(javaInterface)
+                .write(entity);
+    }
 
-	@Override
-	public void generate(final Enum enm, final TemplateContext context) throws IOException {
-		EnumWriter.create(context.cwd(), TemplateUtils.getJavaEnumName(enm))
-				.write(enm);
-	}
+    @Override
+    public void generate(final org.xomda.model.Enum enm, final TemplateContext context) throws IOException {
+        EnumWriter.create(context.cwd(), TemplateUtils.getJavaEnumName(enm))
+                .write(enm);
+    }
 
 }
 ```
