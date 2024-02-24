@@ -16,7 +16,7 @@ parts:
 
 XOMDA comes with a default object model, as shown below:
 
-<img src="../object-model-diagram.svg" width="300" style="margin:2em auto;" />
+<img src="/object-model-diagram.svg" width="300" style="margin:2em auto;" />
 
 It's a simple data structure which provide the building blocks for defining a complex object model.
 When using the default XOMDA object model in your own project, it will be parsed and represented in this structure.
