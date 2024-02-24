@@ -32,7 +32,7 @@ export default defineConfig({
             link: "/getting-started/the-object-model",
           },
           { text: "Using with Gradle", link: "/getting-started/gradle-build" },
-          { text: "Code Templates", link: "/getting-started/code-templates" },
+          { text: "Templates", link: "/getting-started/templates" },
         ],
       },
     ],

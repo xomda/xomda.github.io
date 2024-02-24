@@ -28,7 +28,6 @@ features:
 
 <script setup>
 import { VPButton } from 'vitepress/theme'
-
 </script>
 
 <div style="margin: 1.25em; margin-top:2.5em; text-align: center;">

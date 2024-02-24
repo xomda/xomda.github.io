@@ -11,7 +11,7 @@ It's easy to add XOMDA to Gradle, this automates a lot and provides a seamless e
 First of all, make sure that Gradle knows where to find the plugin. Therefore, you need to configure the plugin
 management in your settings.gradle.
 
-***settings.gradle***
+**_settings.gradle_**
 
 ```groovy
 pluginManagement {
@@ -24,7 +24,7 @@ pluginManagement {
 
 Next, add the Gradle plugin to your individual build files.
 
-***gradle.build***
+**_gradle.build_**
 
 ```groovy
 plugins {
@@ -37,7 +37,7 @@ repositories {
 }
 
 dependencies {
-    // The "xomda" configuration lets you add dependencies 
+    // The "xomda" configuration lets you add dependencies
     // to your build-templates
     xomda libs.log4j
 }
@@ -75,17 +75,29 @@ xomda {
 
 ### Plugins & Templates
 
-The gradle plugin can be extend in various ways, even Templates are treated like plugins.
+The gradle plugin can be extended in various ways,
+even the Templates themselves are plugins and can be injected through config.
+
+Plugins can also be bundled in a _XOMDAModule_, which is actually a container of other plugins.
 
 ```groovy
 xomda {
-    plugins ["org.xomda.model.Plugin"]
+    plugins ["org.xomda.core.module.XOMDACore"]
 }
 ```
 
+The XOMDA default plugin (`XOMDACore`) is an example of a module. It contains three plugins:
+
+- one for defining parent/child relationships (`XOMDAReverseEntity`),
+- one for resolving references to other XOMDA objects (`XOMDATypeRefs`)
+- and one for recursively generating code out of a parsed object model (`XOMDACodeTemplate`)
+
 ## Templates
 
-After XOMDA is added to your Gradle build, it needs be provided with some templates
-that will generate your code and assets.
+After XOMDA is added to your Gradle build, it needs to be provided with some templates
+that will generate your code and/or assets.
 
-All of this code needs to be added to the `src/xomda/java` directory in your project.
+All of this template code needs to be placed in a directory called `src/xomda/java` in your project.
+
+Another way of working with templates — and maybe share them across multiple projects — is to
+specify them in the XOMDA configuration as plugins ([see above](#plugins-templates)).

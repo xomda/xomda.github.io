@@ -2,9 +2,9 @@
 outline: deep
 ---
 
-# Code Templates
+# Templates
 
-The templates can be used to generate assets, such as code out of your Object Model.
+The templates can be used to generate assets — such as code — out of your Object Model.
 Examples can be java interfaces and classes, but also configuration files (like Liquibase changesets) or even
 documentation.
 
