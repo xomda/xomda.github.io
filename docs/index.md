@@ -32,5 +32,5 @@ import { VPButton } from 'vitepress/theme'
 </script>
 
 <div style="margin: 1.25em; margin-top:2.5em; text-align: center;">
-<VPButton text="♥️ Buy us a coffee" href="https://ko-fi.com/xomda" theme="sponsor"/>
+<VPButton text="♥️ Buy us a coffee" href="https://ko-fi.com/xomda" theme="sponsor" style="text-decoration: none"/>
 </div>
