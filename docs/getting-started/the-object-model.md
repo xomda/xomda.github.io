@@ -14,6 +14,13 @@ parts:
 - The schema of the object model
 - The model definitions
 
+XOMDA comes with a default object model, as shown below:
+
+<img src="../object-model-diagram.svg" width="300" style="margin:2em auto;" />
+
+It's a simple data structure which provide the building blocks for defining a complex object model.
+When using the default XOMDA object model in your own project, it will be parsed and represented in this structure.
+
 ## The model schema
 
 The first rows of the CSV specify the schema. The first blank line distinguished the schema from the actual model.
@@ -33,7 +40,8 @@ Attribute;name;identifier;type;size;scale;enumRef;entityRef;dependency;multiValu
 ### How the schema is parsed
 
 First, the CSV parser will try to match a corresponding Java interface, which matches the name of the current object.
-The name of object the is defined in the first column; for the default embedded XOMDA model, this would then be _Package_, _Enum_, _Entity_ and _Attribute_.  
+The name of object the is defined in the first column; for the default embedded XOMDA model, this would then be
+_Package_, _Enum_, _Entity_ and _Attribute_.  
 The packagename of the Object is can be specified in the settings, and defaults standard to `org.xomda.model`.  
 Another way of specifying the package, is to just provide a fully qualified classname for the object.
 
@@ -42,7 +50,8 @@ defined in the schema. This is done by looking for getters with a corresponding 
 
 ### Linking models together
 
-An Attribute should know it's attached to an Entity, or a Value to an Enum. This is done by providing a collection on the parent, and a back-reference on the child.  
+An Attribute should know it's attached to an Entity, or a Value to an Enum. This is done by providing a collection on
+the parent, and a back-reference on the child.  
 For example: The Entity Java interface has a getter called `Collection<Attribute> getAttributeList()`,
 while Attribute has a getter called `Entity getEntity()`.  
 This ties the both together, such that the parser knows that it should add Attributes to the previously defined Entity.
@@ -51,7 +60,8 @@ So when defining your own model, keep this principle in mind if you want to crea
 
 ## The model definition
 
-The subsequent lines following the schema, are the object model definition itself. Each line will start with one of the Objects defined in the Schema.  
+The subsequent lines following the schema, are the object model definition itself. Each line will start with one of the
+Objects defined in the Schema.
 
 For example, defining a Package is done like so:
 
@@ -85,9 +95,11 @@ Attribute;E-mail;eml;String;255;;;;;;;
 
 If you want to create a custom Object Model, you can do so by creating new Java interfaces for each Object found in the
 CSV schema.  
-As the parser creates proxy objects for these interfaces, it's not needed to provide implementation classes. The proxy objects will function as instances of the given interface, without the need of an actual class.
+As the parser creates proxy objects for these interfaces, it's not needed to provide implementation classes. The proxy
+objects will function as instances of the given interface, without the need of an actual class.
 
-It's both possible to extend the existing schema objects —provided by XOMDA — or create complete new objects which have nothing to do with the default XOMDA object model.
+It's both possible to extend the existing schema objects —provided by XOMDA — or create complete new objects which have
+nothing to do with the default XOMDA object model.
 
 ### Adding new schema objects
 
@@ -106,14 +118,15 @@ package your.package.name;
 
 public interface Fish {
 
-    String getName();
+ String getName();
 
-    int getAge();
+ int getAge();
 
 }
 ````
 
-The compiler can then use this interface to correctly determine the Java types being used (because CSV only contains String values).
+The compiler can then use this interface to correctly determine the Java types being used (because CSV only contains
+String values).
 
 ### Extending existing Schema objects
 
@@ -121,14 +134,17 @@ You may want to just extend the default functionality of the default Object Mode
 an extra attribute, or some new Reverse Entity relationship.
 
 ````java
-package your.package.name;
+package your.
+
+package.name;
 
 import org.xomda.model.Entity
 
 public interface MyEntity extends Entity {
 
-    Long getSomethingExtra();
-    setSomethingExtra(Long somethingExtra);
+ Long getSomethingExtra();
+
+ setSomethingExtra(Long somethingExtra);
 
 }
 ````
