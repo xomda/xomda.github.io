@@ -4,7 +4,7 @@ outline: deep
 
 # Using XOMDA with Gradle
 
-It's easy to add XOMDA to Gradle, this will automate a lot.
+It's easy to add XOMDA to Gradle, this automates a lot and provides a seamless experience.
 
 ## Build configuration
 
