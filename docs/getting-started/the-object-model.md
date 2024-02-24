@@ -23,27 +23,26 @@ Each line in the CSV schema specifies a type of Object. The **name** of this Obj
 definition following the schema.
 
 <CsvTable data="
-Package;name;packageName;;;;;;;;;
+Package;name;packageName;;;;;;;;;description
 Enum;name;identifier;;;;;;;;;description
 Value;name;;;;;;;;;;description
 Entity;name;identifier;parent;type;;dependency;transient;;;;description
 Attribute;name;identifier;type;size;scale;enumRef;entityRef;dependency;multiValued;required;description
 "/>
 
-### How The schema is parsed
+### How the schema is parsed
 
 First, the CSV parser will try to match a corresponding Java interface, which matches the name of the current object.
-The name of the is defined in the first column; for the shipped model, this would then be _Package_, _Enum_, _Entity_
-and _Attribute_.  
-The packagename of the Object is specified in the settings, and defaults standard to `org.xomda.model`.
+The name of object the is defined in the first column; for the default embedded XOMDA model, this would then be _Package_, _Enum_, _Entity_ and _Attribute_.  
+The packagename of the Object is can be specified in the settings, and defaults standard to `org.xomda.model`.  
+Another way of specifying the package, is to just provide a fully qualified classname for the object.
 
 Next, when a corresponding Java interface is found, the parser will try to figure out the type of each property that is
 defined in the schema. This is done by looking for getters with a corresponding name and look at their return type.
 
 ### Linking models together
 
-An Attribute should know it's attached to an Entity, or a Value to an Enum. This is done by providing a list on the
-parent, and a back-reference on the child.  
+An Attribute should know it's attached to an Entity, or a Value to an Enum. This is done by providing a collection on the parent, and a back-reference on the child.  
 For example: The Entity Java interface has a getter called `Collection<Attribute> getAttributeList()`,
 while Attribute has a getter called `Entity getEntity()`.  
 This ties the both together, such that the parser knows that it should add Attributes to the previously defined Entity.
@@ -52,8 +51,7 @@ So when defining your own model, keep this principle in mind if you want to crea
 
 ## The model definition
 
-The subsequent lines following the object model schema, are the object model definition itself.
-Each line will start with one of the Objects defined in the Schema.
+The subsequent lines following the schema, are the object model definition itself. Each line will start with one of the Objects defined in the Schema.  
 
 For example, defining a Package is done like so:
 
@@ -83,16 +81,15 @@ Attribute;Last Name;lname;String;255;;;;;;;
 Attribute;E-mail;eml;String;255;;;;;;;
 "/>
 
-## Extending the Object Model
+## Extending the object model
 
 If you want to create a custom Object Model, you can do so by creating new Java interfaces for each Object found in the
-CSV schema. The parser will create proxy objects for these interfaces, so you don't need to provide implementation
-classes.
+CSV schema.  
+As the parser creates proxy objects for these interfaces, it's not needed to provide implementation classes. The proxy objects will function as instances of the given interface, without the need of an actual class.
 
-You can either extend the existing schema objects (provided by XOMDA), or create complete new objects which have nothing
-to do with the default XOMDA object model.
+It's both possible to extend the existing schema objects —provided by XOMDA — or create complete new objects which have nothing to do with the default XOMDA object model.
 
-### Adding new Schema objects
+### Adding new schema objects
 
 The following line in a CSV schema will introduce an object called `Fish`, which has a name and an age:
 
@@ -110,16 +107,13 @@ package your.package.name;
 public interface Fish {
 
     String getName();
-    setName(String name);
 
     int getAge();
-    setAge(int age);
 
 }
 ````
 
-The compiler can then use this interface to correctly determine the Java types being used (because CSV only returns
-String values).
+The compiler can then use this interface to correctly determine the Java types being used (because CSV only contains String values).
 
 ### Extending existing Schema objects
 
