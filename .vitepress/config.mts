@@ -5,9 +5,7 @@ export default defineConfig({
   title: "XOMDA",
   description: "Extensible Object Model Data Abstraction",
 
-  head: [
-    // ["link", { rel: "icon", href: "/favicon.ico" }]
-  ],
+  head: [["link", { rel: "icon", href: "/logo.svg" }]],
 
   srcDir: "./docs",
 
