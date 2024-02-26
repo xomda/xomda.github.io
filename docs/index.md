@@ -6,7 +6,7 @@ hero:
   name: "XOMDA"
   text: "Tools for Data Abstraction"
   tagline: Don't write it. Generate it!
-  image: "./logo.png"
+  image: "./logo-anim.svg"
   actions:
     - theme: brand
       text: Get Started
