@@ -6,8 +6,8 @@
   "devDependencies": {
     "eslint": "^8.57.0",
     "prettier": "^3.2.5",
-    "typescript": "^5.3.3",
-    "vitepress": "^1.0.0-rc.44",
+    "typescript": "^5.4.2",
+    "vitepress": "^1.0.0-rc.45",
     "vue": "^3.4.21"
   },
   "scripts": {
@@ -15,5 +15,5 @@
     "docs:build": "vitepress build",
     "docs:preview": "vitepress preview"
   },
-  "packageManager": "yarn@4.1.0"
+  "packageManager": "yarn@4.1.1"
 }
