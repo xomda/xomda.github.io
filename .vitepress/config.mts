@@ -15,6 +15,12 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Documentation", link: "/intro/what-is-xomda" },
+      { text: "Utils", items:[{
+        text: "common-java",
+        target: "_self",
+        link: "//common-java.xomda.org/"
+       }]
+      },
     ],
 
     sidebar: [
