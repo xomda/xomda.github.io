@@ -28,7 +28,7 @@ Next, add the Gradle plugin to your individual build files.
 
 ```groovy
 plugins {
-    id "org.xomda.plugin-gradle" version "latest.release"
+    id "org.xomda.xomda-plugin-gradle" version "latest.release"
 }
 
 repositories {
